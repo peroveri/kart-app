@@ -9,12 +9,23 @@ export const useCityBikesStore = defineStore('cityBikes', {
   state: () => ({
     stationInformation: null as StationInformationResponse | null,
     stationStatus: null as StationStatusResponse | null,
+
+    /**
+     * Holds the feeds which can be used to retrieve other resources
+     */
     feeds: null as Feeds | null,
     errors: [] as any[]
   }),
   getters: {
+    /**
+     * Combines station information with status
+     */
     stationsWithStatus: (state) =>
       mapStationsWithStatus(state.stationInformation, state.stationStatus),
+
+    /**
+     * Returns true if there are any unhandled errors
+     */
     hasErrors: (state) => state.errors.length > 0
   },
   actions: {
